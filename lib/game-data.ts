@@ -340,6 +340,7 @@ export const PLAYLIST = [
     artist: "Taylor Swift", 
     color: "#a855f7", 
     spotifyId: "6lzc0Al0zfZOIFsFvBS1ki",
+    audioUrl: "/state_of_grace.mpeg",
     lyrics: [
       "I'm walking fast through the traffic lights",
       "Busy streets and busy lives",
@@ -356,6 +357,7 @@ export const PLAYLIST = [
     artist: "Taylor Swift", 
     color: "#1ed760", 
     spotifyId: "1LYJqhclJHbnXhVMhQMHKB",
+    audioUrl: "/long_live.mpeg",
     lyrics: [
       "I said remember this moment",
       "In the back of my mind",
@@ -373,6 +375,7 @@ export const PLAYLIST = [
     artist: "Luan Santana", 
     color: "#ff4db8", 
     spotifyId: "2j5eag2AXHgL8v3muA3VDT",
+    audioUrl: "/te_vivo.mpeg",
     lyrics: [
       "Quando me sinto só",
       "Te faço mais presente",
@@ -391,6 +394,7 @@ export const PLAYLIST = [
     artist: "Jao", 
     color: "#22d3ee", 
     spotifyId: "0Y6Jt8Z13J17y1K9zL5w7Q",
+    audioUrl: "/a_rua.mpeg",
     lyrics: [
       "Eu não sei se você",
       "Ainda pensa em mim",
