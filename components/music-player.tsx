@@ -187,10 +187,10 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
             )}
           </div>
           <div className="flex flex-col truncate">
-            <span className={`text-[13px] md:text-sm font-bold text-white hover:underline cursor-pointer truncate transition-all duration-700 ${isTitleHidden ? "blur-sm opacity-60 select-none" : "blur-0 opacity-100"}`}>
-              {isTitleHidden ? "Música Oculta" : track.title}
+            <span className="text-[13px] md:text-sm font-bold text-white hover:underline cursor-pointer truncate transition-colors duration-500">
+              {isTitleHidden ? "Música Secreta" : track.title}
             </span>
-            <span className={`text-[11px] md:text-xs text-white/60 hover:underline cursor-pointer hover:text-white truncate transition-all duration-700 ${isTitleHidden ? "blur-sm opacity-60 select-none" : "blur-0 opacity-100"}`}>
+            <span className="text-[11px] md:text-xs text-white/60 hover:underline cursor-pointer hover:text-white truncate transition-colors duration-500">
               {isTitleHidden ? "Artista Misterioso" : track.artist}
             </span>
           </div>
