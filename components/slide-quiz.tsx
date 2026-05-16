@@ -30,7 +30,7 @@ const fadeUp = {
   },
 };
 
-export function QuizSlideView({ slide, onNext }: QuizSlideViewProps) {
+export function QuizSlideView({ slide, onNext, onAnswered }: QuizSlideViewProps) {
   const [selected, setSelected] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
   const [shakeIdx, setShakeIdx] = useState<number | null>(null);
@@ -212,24 +212,6 @@ export function QuizSlideView({ slide, onNext }: QuizSlideViewProps) {
           )}
         </AnimatePresence>
 
-        {/* Architecture Sticker Overlay */}
-        <AnimatePresence>
-          {answered && slide.category === "architecture" && selected !== null && (
-            <motion.div
-              initial={{ scale: 0, x: 100, rotate: selected === slide.correctIndex ? -5 : 5, y: "-50%" }}
-              animate={{ scale: 1, x: 0, rotate: 0, y: "-50%" }}
-              exit={{ scale: 0, opacity: 0, x: 100 }}
-              transition={{ type: "spring", stiffness: 180, damping: 15 }}
-              className="fixed right-4 md:right-[10%] top-[15%] md:top-1/2 z-50 pointer-events-none drop-shadow-2xl opacity-90 md:opacity-100"
-            >
-              <img 
-                src={selected === slide.correctIndex ? slide.happySticker : slide.sadSticker} 
-                alt="Sticker de Arquitetura" 
-                className="w-32 h-32 md:w-80 md:h-80 object-contain" 
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </motion.div>
   );

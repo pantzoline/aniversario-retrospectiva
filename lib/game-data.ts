@@ -124,8 +124,6 @@ export const SLIDES: GameSlide[] = [
     question: "Qual arquiteto brasileiro desenhou o Museu de Arte Contemporanea (MAC) em Niteroi?",
     options: ["Lina Bo Bardi", "Oscar Niemeyer", "Paulo Mendes da Rocha", "Vilanova Artigas"],
     correctIndex: 1,
-    happySticker: "/oscar_happy.png",
-    sadSticker: "/oscar_sad.png",
   },
   // ── 7. REVEAL ──
   {
@@ -220,8 +218,6 @@ export const SLIDES: GameSlide[] = [
     question: "O estilo gotico e conhecido por qual caracteristica arquitetonica principal?",
     options: ["Arcos de volta perfeita", "Arcos ogivais (apontados)", "Colunas doricas", "Cupulas arredondadas"],
     correctIndex: 1,
-    happySticker: "/gargoyle_happy.png",
-    sadSticker: "/gargoyle_sad.png",
   },
   // ── 15. QUIZ BARBIE: Rapunzel ──
   {
@@ -273,8 +269,6 @@ export const SLIDES: GameSlide[] = [
     question: "O que e o 'Croqui' na arquitetura?",
     options: ["O orcamento da obra", "O terreno vazio", "Um esboco rapido a mao livre", "O telhado do projeto"],
     correctIndex: 2,
-    happySticker: "/croqui_happy.png",
-    sadSticker: "/croqui_sad.png",
   },
   // ── 19. QUIZ BARBIE: Princesa e Plebeia ──
   {

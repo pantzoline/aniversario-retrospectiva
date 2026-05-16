@@ -15,14 +15,38 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
   const [currentTrack, setCurrentTrack] = useState(0);
   const [progress, setProgress] = useState(0);
   const [showLyrics, setShowLyrics] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Cleanup: stop audio when component unmounts or track changes
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        audioRef.current.src = "";
+      }
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
 
   // Sync with active slide
   useEffect(() => {
     if (activeTrackIndex !== undefined && activeTrackIndex >= 0 && activeTrackIndex < PLAYLIST.length) {
+      // Stop any currently playing audio first
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+      
       setCurrentTrack(activeTrackIndex);
       setProgress(0);
+      setCurrentTime(0);
+      setDuration(0);
       setIsPlaying(true);
       
       // Auto-open lyrics on desktop, closed on mobile to save space
@@ -64,6 +88,8 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
       const updateProgress = () => {
         if (audioRef.current && audioRef.current.duration) {
           setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100);
+          setCurrentTime(audioRef.current.currentTime);
+          setDuration(audioRef.current.duration);
         }
       };
       
@@ -211,7 +237,7 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
           </div>
           
           <div className="flex items-center gap-2 w-full text-xs text-white/60 font-mono">
-            <span>0:{(Math.floor(progress / 5)).toString().padStart(2, '0')}</span>
+            <span>{Math.floor(currentTime / 60)}:{Math.floor(currentTime % 60).toString().padStart(2, '0')}</span>
             <div className="h-1 flex-1 bg-white/20 rounded-full overflow-hidden group cursor-pointer relative">
               <div 
                 className="h-full bg-white group-hover:bg-[#1ed760] relative transition-all duration-300"
@@ -220,7 +246,7 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 shadow-md" />
               </div>
             </div>
-            <span>0:20</span>
+            <span>{Math.floor(duration / 60)}:{Math.floor(duration % 60).toString().padStart(2, '0')}</span>
           </div>
         </div>
 
