@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { StatSlide } from "@/lib/game-data";
 
@@ -29,6 +30,39 @@ const stagger = {
 export function StatSlideView({ slide, onNext }: StatSlideViewProps) {
   // If the number is just "∞", we treat it as an aura/text-only slide, not a data stat.
   const isInfinity = slide.bigNumber === "∞";
+  
+  const isTop5 = slide.bigNumber === "Top 5%";
+  const is1000 = slide.bigNumber === "1.000+";
+  
+  const [count, setCount] = useState(isTop5 ? 25 : is1000 ? 0 : 0);
+
+  useEffect(() => {
+    if (isTop5) {
+      let current = 25;
+      const t = setInterval(() => {
+        current -= 1;
+        setCount(current);
+        if (current <= 5) clearInterval(t);
+      }, 60); // Speed of counting down
+      return () => clearInterval(t);
+    } else if (is1000) {
+      let current = 0;
+      const t = setInterval(() => {
+        current += 34; // Increment speed
+        if (current >= 1000) {
+          setCount(1000);
+          clearInterval(t);
+        } else {
+          setCount(current);
+        }
+      }, 30);
+      return () => clearInterval(t);
+    }
+  }, [isTop5, is1000]);
+
+  let renderedBigNumber = slide.bigNumber;
+  if (isTop5) renderedBigNumber = `Top ${count}%`;
+  if (is1000) renderedBigNumber = `${count}+`;
 
   return (
     <motion.div
@@ -92,7 +126,7 @@ export function StatSlideView({ slide, onNext }: StatSlideViewProps) {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-6xl md:text-8xl lg:text-[10rem] font-serif italic font-bold tracking-tight leading-[0.9] text-foreground/90"
             >
-              {slide.bigNumber}
+              {renderedBigNumber}
             </motion.h2>
           </div>
         )}

@@ -5,9 +5,11 @@ import { FloatingParticles } from "./floating-particles";
 
 interface IntroScreenProps {
   onStart: () => void;
+  hasCompletedJourney?: boolean;
+  onJumpTo?: (index: number) => void;
 }
 
-export function IntroScreen({ onStart }: IntroScreenProps) {
+export function IntroScreen({ onStart, hasCompletedJourney, onJumpTo }: IntroScreenProps) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -104,7 +106,6 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
           className="relative px-12 py-4 rounded-full font-sans font-bold text-[15px] tracking-wide cursor-pointer overflow-hidden group"
           style={{ background: "#fff", color: "#000" }}
         >
-          <span className="relative z-10">Comecar Jornada</span>
           <motion.div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{
@@ -115,29 +116,54 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           />
           <span className="relative z-10 group-hover:text-white transition-colors duration-500">
-            Comecar Jornada
+            {hasCompletedJourney ? "Ver Tudo Novamente" : "Começar Jornada"}
           </span>
         </motion.button>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.4 }}
-          transition={{ delay: 2.8, duration: 1 }}
-          className="mt-14"
-        >
+        {/* Quick Jump Menu (Only visible after completing the journey) */}
+        {hasCompletedJourney && onJumpTo && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.3 }}
+            className="mt-8 grid grid-cols-2 gap-3 w-full max-w-sm"
+          >
+            <button onClick={() => onJumpTo(1)} className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-xs text-white/80 flex flex-col items-center gap-2">
+              <span className="text-xl">🎵</span> Músicas
+            </button>
+            <button onClick={() => onJumpTo(5)} className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-xs text-white/80 flex flex-col items-center gap-2">
+              <span className="text-xl">🏛️</span> Arquitetura
+            </button>
+            <button onClick={() => onJumpTo(15)} className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-xs text-white/80 flex flex-col items-center gap-2">
+              <span className="text-xl">📊</span> Estatística
+            </button>
+            <button onClick={() => onJumpTo(20)} className="px-4 py-3 rounded-xl bg-[#ff4db8]/20 border border-[#ff4db8]/40 hover:bg-[#ff4db8]/30 transition-colors text-xs text-[#ff4db8] font-bold flex flex-col items-center gap-2 shadow-[0_0_20px_rgba(255,77,184,0.15)]">
+              <span className="text-xl">🎀</span> Surpresa
+            </button>
+          </motion.div>
+        )}
+
+        {/* Scroll indicator (Hide if we have the quick menu so it doesn't clutter) */}
+        {!hasCompletedJourney && (
           <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-5 h-8 rounded-full border border-foreground/15 flex items-start justify-center pt-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ delay: 2.8, duration: 1 }}
+            className="mt-14"
           >
             <motion.div
-              animate={{ height: [4, 8, 4], opacity: [0.3, 0.6, 0.3] }}
+              animate={{ y: [0, 6, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-[2px] rounded-full bg-foreground/40"
-            />
+              className="w-5 h-8 rounded-full border border-foreground/15 flex items-start justify-center pt-2"
+            >
+              <motion.div
+                animate={{ height: [4, 8, 4], opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="w-[2px] rounded-full bg-foreground/40"
+              />
+            </motion.div>
           </motion.div>
-        </motion.div>
+        )}
       </div>
     </motion.div>
   );

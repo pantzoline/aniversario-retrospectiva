@@ -25,6 +25,7 @@ export default function GamePage() {
   const [screen, setScreen] = useState<Screen>("intro");
   const [currentSlideIdx, setCurrentSlideIdx] = useState(0);
   const [isFinaleAudioPlaying, setIsFinaleAudioPlaying] = useState(false);
+  const [hasCompletedJourney, setHasCompletedJourney] = useState(false);
   const [direction, setDirection] = useState(1);
 
   const handleStart = useCallback(() => {
@@ -41,9 +42,16 @@ export default function GamePage() {
     setDirection(-1);
     setCurrentSlideIdx(0);
     setIsFinaleAudioPlaying(false);
+    setHasCompletedJourney(true);
     setTimeout(() => {
       setScreen("intro");
     }, 600);
+  }, []);
+
+  const handleJumpTo = useCallback((index: number) => {
+    setDirection(1);
+    setCurrentSlideIdx(index);
+    setScreen("story");
   }, []);
 
   const currentSlide = SLIDES[currentSlideIdx];
@@ -94,7 +102,12 @@ export default function GamePage() {
     <main className="relative h-dvh w-full overflow-hidden bg-background">
       <AnimatePresence mode="wait">
         {screen === "intro" && (
-          <IntroScreen key="intro" onStart={handleStart} />
+          <IntroScreen 
+            key="intro" 
+            onStart={handleStart} 
+            hasCompletedJourney={hasCompletedJourney} 
+            onJumpTo={handleJumpTo} 
+          />
         )}
       </AnimatePresence>
 
