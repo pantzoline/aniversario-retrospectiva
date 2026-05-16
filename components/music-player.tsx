@@ -125,9 +125,12 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
 
   const track = PLAYLIST[currentTrack];
 
-  // Calculate which lyric line should be active based on progress
+  // Calculate which lyric line should be active based on real audio time
   const activeLyricIndex = track.lyrics 
-    ? Math.floor((progress / 100) * track.lyrics.length)
+    ? track.lyrics.reduce((activeIdx, lyric, i) => {
+        if (currentTime >= lyric.time) return i;
+        return activeIdx;
+      }, -1)
     : -1;
 
   return (
@@ -180,7 +183,7 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
                         textShadow: isActive ? `0 0 30px ${track.color}80` : "none",
                       }}
                     >
-                      {line}
+                      {line.text}
                     </motion.p>
                   );
                 })}

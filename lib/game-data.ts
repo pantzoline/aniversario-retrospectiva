@@ -336,13 +336,13 @@ export const PLAYLIST = [
     spotifyId: "6lzc0Al0zfZOIFsFvBS1ki",
     audioUrl: "/state_of_grace.mpeg",
     lyrics: [
-      "I'm walking fast through the traffic lights",
-      "Busy streets and busy lives",
-      "And all we know is touch and go",
-      "We are alone with our changing minds",
-      "We fall in love 'til it hurts or bleeds, or fades in time",
-      "And I never saw you coming",
-      "And I'll never be the same"
+      { time: 15, text: "I'm walking fast through the traffic lights" },
+      { time: 19, text: "Busy streets and busy lives" },
+      { time: 23, text: "And all we know is touch and go" },
+      { time: 27, text: "We are alone with our changing minds" },
+      { time: 32, text: "We fall in love 'til it hurts or bleeds, or fades in time" },
+      { time: 39, text: "And I never saw you coming" },
+      { time: 43, text: "And I'll never be the same" }
     ]
   },
   { 
@@ -353,14 +353,14 @@ export const PLAYLIST = [
     spotifyId: "1LYJqhclJHbnXhVMhQMHKB",
     audioUrl: "/long_live.mpeg",
     lyrics: [
-      "I said remember this moment",
-      "In the back of my mind",
-      "The time we stood with our shaking hands",
-      "The crowds in stands went wild",
-      "We were the kings and the queens",
-      "And they read off our names",
-      "The night you danced like you knew our lives",
-      "Would never be the same"
+      { time: 13, text: "I said remember this moment" },
+      { time: 17, text: "In the back of my mind" },
+      { time: 20, text: "The time we stood with our shaking hands" },
+      { time: 24, text: "The crowds in stands went wild" },
+      { time: 27, text: "We were the kings and the queens" },
+      { time: 30, text: "And they read off our names" },
+      { time: 33, text: "The night you danced like you knew our lives" },
+      { time: 37, text: "Would never be the same" }
     ]
   },
   { 
@@ -371,15 +371,15 @@ export const PLAYLIST = [
     spotifyId: "2j5eag2AXHgL8v3muA3VDT",
     audioUrl: "/te_vivo.mpeg",
     lyrics: [
-      "Quando me sinto só",
-      "Te faço mais presente",
-      "Eu fecho os meus olhos",
-      "E enxergo a gente",
-      "Em questão de segundos",
-      "Voo pra outro mundo",
-      "Outra constelação",
-      "Não dá pra explicar",
-      "Ao ver você chegar"
+      { time: 10, text: "Quando me sinto só" },
+      { time: 14, text: "Te faço mais presente" },
+      { time: 18, text: "Eu fecho os meus olhos" },
+      { time: 22, text: "E enxergo a gente" },
+      { time: 26, text: "Em questão de segundos" },
+      { time: 30, text: "Voo pra outro mundo" },
+      { time: 34, text: "Outra constelação" },
+      { time: 38, text: "Não dá pra explicar" },
+      { time: 42, text: "Ao ver você chegar" }
     ]
   },
   { 
@@ -390,13 +390,13 @@ export const PLAYLIST = [
     spotifyId: "0Y6Jt8Z13J17y1K9zL5w7Q",
     audioUrl: "/a_rua.mpeg",
     lyrics: [
-      "Eu não sei se você",
-      "Ainda pensa em mim",
-      "Como eu penso em você",
-      "Antes de dormir",
-      "Eu deixei a luz acesa",
-      "Caso você queira voltar",
-      "Pra me ver, pra me ter"
+      { time: 12, text: "Eu não sei se você" },
+      { time: 16, text: "Ainda pensa em mim" },
+      { time: 20, text: "Como eu penso em você" },
+      { time: 24, text: "Antes de dormir" },
+      { time: 28, text: "Eu deixei a luz acesa" },
+      { time: 32, text: "Caso você queira voltar" },
+      { time: 36, text: "Pra me ver, pra me ter" }
     ]
   },
   {
@@ -406,10 +406,10 @@ export const PLAYLIST = [
     color: "#ff4db8",
     audioUrl: "/audio_barbie.mpeg",
     lyrics: [
-      "Feliz 21 anos, Manu!",
-      "Que o seu dia seja repleto de luz",
-      "Magia, coragem e muitos sonhos...",
-      "Nós amamos você!"
+      { time: 2, text: "Feliz 21 anos, Manu!" },
+      { time: 6, text: "Que o seu dia seja repleto de luz" },
+      { time: 10, text: "Magia, coragem e muitos sonhos..." },
+      { time: 14, text: "Nós amamos você!" }
     ]
   }
 ];
