@@ -125,13 +125,24 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
 
   const track = PLAYLIST[currentTrack];
 
-  // Calculate which lyric line should be active based on real audio time
-  const activeLyricIndex = track.lyrics 
-    ? track.lyrics.reduce((activeIdx, lyric, i) => {
-        if (currentTime >= lyric.time) return i;
-        return activeIdx;
-      }, -1)
-    : -1;
+  // Simple timed lyric progression: advance one line every ~4 seconds
+  const [lyricIndex, setLyricIndex] = useState(-1);
+  useEffect(() => {
+    if (!track.lyrics || !isPlaying) return;
+    setLyricIndex(-1);
+    // Start showing first lyric after 2 seconds
+    const startTimer = setTimeout(() => setLyricIndex(0), 2000);
+    // Then advance every 4 seconds
+    const interval = setInterval(() => {
+      setLyricIndex(prev => {
+        if (prev >= (track.lyrics?.length ?? 1) - 1) return prev;
+        return prev + 1;
+      });
+    }, 4000);
+    return () => { clearTimeout(startTimer); clearInterval(interval); };
+  }, [currentTrack, isPlaying]);
+
+  const activeLyricIndex = lyricIndex;
 
   return (
     <>
@@ -153,7 +164,7 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
             </div>
 
             <div className="absolute top-8 right-6 md:right-8 flex items-center gap-2 text-[10px] md:text-xs font-sans font-bold tracking-widest uppercase" style={{ color: track.color }}>
-              <Mic2 size={14} /> Sincronizado
+              <Mic2 size={14} /> Letras
             </div>
             
             <div className="relative h-full w-full flex flex-col justify-center mask-fade-y pt-20">
