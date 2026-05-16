@@ -7,9 +7,10 @@ import { Play, Pause, SkipBack, SkipForward, Volume2, Mic2, MonitorSpeaker, Hear
 
 interface MusicPlayerProps {
   activeTrackIndex?: number;
+  isTitleHidden?: boolean;
 }
 
-export function MusicPlayer({ activeTrackIndex }: MusicPlayerProps) {
+export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -176,17 +177,21 @@ export function MusicPlayer({ activeTrackIndex }: MusicPlayerProps) {
         {/* Left: Track Info */}
         <div className="flex items-center gap-3 md:gap-4 w-[60%] md:w-[30%] min-w-[120px] md:min-w-[180px]">
           <div 
-            className="w-10 h-10 md:w-14 md:h-14 rounded shadow-lg flex items-center justify-center shrink-0"
+            className="w-10 h-10 md:w-14 md:h-14 rounded shadow-lg flex items-center justify-center shrink-0 overflow-hidden relative"
             style={{ background: `linear-gradient(135deg, ${track.color}, #111)` }}
           >
-            <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black/40 animate-pulse" />
+            {isTitleHidden ? (
+              <span className="text-white/50 font-serif font-bold text-lg md:text-2xl animate-pulse">?</span>
+            ) : (
+              <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-black/40 animate-pulse" />
+            )}
           </div>
           <div className="flex flex-col truncate">
-            <span className="text-[13px] md:text-sm font-bold text-white hover:underline cursor-pointer truncate">
-              {track.title}
+            <span className={`text-[13px] md:text-sm font-bold text-white hover:underline cursor-pointer truncate transition-all duration-700 ${isTitleHidden ? "blur-sm opacity-60 select-none" : "blur-0 opacity-100"}`}>
+              {isTitleHidden ? "Música Oculta" : track.title}
             </span>
-            <span className="text-[11px] md:text-xs text-white/60 hover:underline cursor-pointer hover:text-white truncate">
-              {track.artist}
+            <span className={`text-[11px] md:text-xs text-white/60 hover:underline cursor-pointer hover:text-white truncate transition-all duration-700 ${isTitleHidden ? "blur-sm opacity-60 select-none" : "blur-0 opacity-100"}`}>
+              {isTitleHidden ? "Artista Misterioso" : track.artist}
             </span>
           </div>
           <Heart size={16} className="hidden md:block text-white/60 hover:text-white cursor-pointer shrink-0 ml-2" />

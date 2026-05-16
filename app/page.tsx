@@ -26,6 +26,7 @@ export default function GamePage() {
   const [currentSlideIdx, setCurrentSlideIdx] = useState(0);
   const [isFinaleAudioPlaying, setIsFinaleAudioPlaying] = useState(false);
   const [hasCompletedJourney, setHasCompletedJourney] = useState(false);
+  const [isQuizAnswered, setIsQuizAnswered] = useState(false);
   const [direction, setDirection] = useState(1);
 
   const handleStart = useCallback(() => {
@@ -34,6 +35,7 @@ export default function GamePage() {
   }, []);
 
   const goNext = useCallback(() => {
+    setIsQuizAnswered(false);
     setDirection(1);
     setCurrentSlideIdx((prev) => Math.min(prev + 1, SLIDES.length - 1));
   }, []);
@@ -42,6 +44,7 @@ export default function GamePage() {
     setDirection(-1);
     setCurrentSlideIdx(0);
     setIsFinaleAudioPlaying(false);
+    setIsQuizAnswered(false);
     setHasCompletedJourney(true);
     setTimeout(() => {
       setScreen("intro");
@@ -51,6 +54,7 @@ export default function GamePage() {
   const handleJumpTo = useCallback((index: number) => {
     setDirection(1);
     setCurrentSlideIdx(index);
+    setIsQuizAnswered(false);
     setScreen("story");
   }, []);
 
@@ -84,7 +88,7 @@ export default function GamePage() {
       return <StatSlideView slide={currentSlide} onNext={goNext} />;
     }
     if (isQuizSlide(currentSlide)) {
-      return <QuizSlideView slide={currentSlide} onNext={goNext} />;
+      return <QuizSlideView slide={currentSlide} onNext={goNext} onAnswered={() => setIsQuizAnswered(true)} />;
     }
     if (isMemorySlide(currentSlide)) {
       return <MemorySlideView slide={currentSlide} onNext={goNext} />;
@@ -158,17 +162,20 @@ export default function GamePage() {
 
           {/* Music Player & Lyrics Panel */}
           {(currentSlide?.type === "quiz" && currentSlide.category === "music") && (
-            <MusicPlayer activeTrackIndex={
-              currentSlide?.id === 2 ? 0 :
-              currentSlide?.id === 8 ? 1 :
-              currentSlide?.id === 12 ? 2 :
-              currentSlide?.id === 17 ? 3 :
-              undefined
-            } />
+            <MusicPlayer 
+              activeTrackIndex={
+                currentSlide?.id === 2 ? 0 :
+                currentSlide?.id === 8 ? 1 :
+                currentSlide?.id === 12 ? 2 :
+                currentSlide?.id === 17 ? 3 :
+                undefined
+              } 
+              isTitleHidden={!isQuizAnswered}
+            />
           )}
 
           {currentSlide?.type === "finale" && isFinaleAudioPlaying && (
-            <MusicPlayer activeTrackIndex={4} />
+            <MusicPlayer activeTrackIndex={4} isTitleHidden={false} />
           )}
         </>
       )}

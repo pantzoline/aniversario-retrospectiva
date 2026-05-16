@@ -9,6 +9,7 @@ import { FloatingParticles } from "./floating-particles";
 interface QuizSlideViewProps {
   slide: QuizSlide;
   onNext: () => void;
+  onAnswered?: () => void;
 }
 
 const stagger = {
@@ -39,6 +40,7 @@ export function QuizSlideView({ slide, onNext }: QuizSlideViewProps) {
     if (answered) return;
     setSelected(idx);
     setAnswered(true);
+    if (onAnswered) onAnswered();
 
     const correct = idx === slide.correctIndex;
 
