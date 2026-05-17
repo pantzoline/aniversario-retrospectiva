@@ -77,17 +77,17 @@ export const SLIDES: GameSlide[] = [
     options: ["State of Grace", "Red", "All Too Well", "Treacherous"],
     correctIndex: 0,
   },
-  // ── 3. STAT: Momentos ──
+  // ── 3. STAT: Dedicatória ──
   {
     id: 3,
     type: "stat",
     bgClass: "bg-wrapped-green",
     gradientClass: "text-gradient-green",
     accentColor: "#1ed760",
-    preTitle: "Juntos, ja compartilhamos",
+    preTitle: "Te dedico todos os meus",
     bigNumber: "1.000+",
-    title: "momentos inesqueciveis",
-    subtitle: "E a contagem nao para. Cada momento com voce vale ouro.",
+    title: "pensamentos a ti",
+    subtitle: "\"Pontos de exclamação que eu não sei usar, se eu soubesse falar, diria que eu te amo.\" — Jovem Dionísio",
   },
   // ── 4. QUIZ BARBIE: Castelo de Diamantes ──
   {
