@@ -196,15 +196,18 @@ export const SLIDES: GameSlide[] = [
     options: ["Tudo Que Voce Quiser", "Chuva de Arroz", "Te Vivo", "Escreve Ai"],
     correctIndex: 2,
   },
-  // ── 13. REVEAL ──
+  // ── 13. QUIZ FUTEBOL: Athletico Paranaense ──
   {
     id: 13,
-    type: "reveal",
-    bgClass: "bg-wrapped-green",
-    gradientClass: "text-gradient-green",
-    accentColor: "#1ed760",
-    preTitle: "O acessorio que a Barbie-Manu nunca tiraria:",
-    lines: ["Coroa", "de Strass"],
+    type: "quiz",
+    bgClass: "bg-wrapped-pink",
+    gradientClass: "text-gradient-pink",
+    accentColor: "#e4002b",
+    category: "barbie" as QuizCategory,
+    categoryLabel: "Furacão",
+    question: "Athletico x Mirassol — 30/05 na Arena da Baixada! Qual vai ser o placar?",
+    options: ["Athletico 1 x 0", "Athletico 2 x 1", "Athletico 3 x 0", "Empate 1 x 1"],
+    correctIndex: 2,
   },
   // ── 14. QUIZ ARCH: Gotico ──
   {
