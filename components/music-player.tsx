@@ -43,9 +43,12 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
         audioRef.current.currentTime = 0;
       }
       
+      const track = PLAYLIST[activeTrackIndex];
+      const seekTo = (track as any).startTime || 0;
+      
       setCurrentTrack(activeTrackIndex);
       setProgress(0);
-      setCurrentTime(0);
+      setCurrentTime(seekTo);
       setDuration(0);
       setIsPlaying(true);
       
@@ -56,13 +59,20 @@ export function MusicPlayer({ activeTrackIndex, isTitleHidden = false }: MusicPl
         setShowLyrics(false);
       }
       
-      const track = PLAYLIST[activeTrackIndex];
       if (track.audioUrl) {
         if (!audioRef.current) {
           audioRef.current = new Audio();
         }
         audioRef.current.src = track.audioUrl;
-        audioRef.current.play().catch(() => {});
+        // Wait for audio to load enough to seek, then jump and play
+        const handleCanPlay = () => {
+          if (audioRef.current) {
+            audioRef.current.currentTime = seekTo;
+            audioRef.current.play().catch(() => {});
+          }
+          audioRef.current?.removeEventListener('canplay', handleCanPlay);
+        };
+        audioRef.current.addEventListener('canplay', handleCanPlay);
       } else if (audioRef.current) {
         audioRef.current.pause();
       }

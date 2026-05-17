@@ -335,6 +335,7 @@ export const PLAYLIST = [
     color: "#a855f7", 
     spotifyId: "6lzc0Al0zfZOIFsFvBS1ki",
     audioUrl: "/state_of_grace.mpeg",
+    startTime: 37,
     lyrics: [
       { time: 15, text: "I'm walking fast through the traffic lights" },
       { time: 19, text: "Busy streets and busy lives" },
@@ -352,6 +353,7 @@ export const PLAYLIST = [
     color: "#1ed760", 
     spotifyId: "1LYJqhclJHbnXhVMhQMHKB",
     audioUrl: "/long_live.mpeg",
+    startTime: 17,
     lyrics: [
       { time: 13, text: "I said remember this moment" },
       { time: 17, text: "In the back of my mind" },
@@ -370,6 +372,7 @@ export const PLAYLIST = [
     color: "#ff4db8", 
     spotifyId: "2j5eag2AXHgL8v3muA3VDT",
     audioUrl: "/te_vivo.mpeg",
+    startTime: 22,
     lyrics: [
       { time: 10, text: "Quando me sinto só" },
       { time: 14, text: "Te faço mais presente" },
@@ -389,6 +392,7 @@ export const PLAYLIST = [
     color: "#22d3ee", 
     spotifyId: "0Y6Jt8Z13J17y1K9zL5w7Q",
     audioUrl: "/a_rua.mpeg",
+    startTime: 10,
     lyrics: [
       { time: 12, text: "Eu não sei se você" },
       { time: 16, text: "Ainda pensa em mim" },
